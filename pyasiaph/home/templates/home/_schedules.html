@@ -1,0 +1,127 @@
+{% load static %}
+
+<div class="relative pb-150 md:pb-300" id="program-schedule">
+    <div class="max-w-975 mx-auto px-25 lg:px-0">
+        <p class="font-baybayinsisil text-20 md:text-24 text-yellow">
+            Program Schedule
+        </p>
+        <h2 class="font-medium text-48 md:text-80 text-white mb-20">
+            Program Schedule
+        </h2>
+        <p class="text-16 text-white-80 md:text-white">
+          Note: This is a working schedule and is subject to change. Please check back regularly for updates and final confirmations.
+          You may also refer to the <a class="text-yellow" href="/talks">Talks, Workshops & Panel Sessions Page</a> for more details.
+        </p>
+    </div>
+    <div class="max-w-full px-25">
+        <div class="py-32">
+            <div class="bg-blue-1 pt-10 sticky top-0">
+                <div class="tab flex items-center justify-start ux">
+                    <button class="tablinks active px-20 h-80 w-175 text-center text-16 text-32 py-11"
+                        onclick="toggleTab(event, 'first')">
+                        Day 1
+                    </button>
+                    <button class="tablinks px-20 h-80 w-175 text-center text-16 text-32 py-11"
+                        onclick="toggleTab(event, 'second')">
+                        Day 2
+                    </button>
+                </div>
+            </div>
+            <div id="tab-contents">
+                <div id="first" class="tabcontent block">
+                    <div id="dp1"></div>
+                </div>
+
+                <div id="second" class="tabcontent hidden">
+                    <div id="dp2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="absolute left-96 -top-225 hidden md:block">
+        <img class="star" src="{% static 'img/constellation-8.svg' %}" alt="constellation" />
+    </div>
+</div>
+
+{% block extra_js %}
+<script type="text/javascript">
+  const config = {
+    viewType: "Resources",
+    theme: "calendar_blue",
+    allowEventOverlap: false,
+    cellHeight: 80,
+    cellDuration: 5,
+    businessBeginsHour: 8,
+    timeRangeSelectedHandling: "Disabled",
+    eventMoveHandling: "Disabled",
+    eventResizeHandling: "Disabled",
+    eventClickHandling: "Disabled",
+    columns: [
+      {name: "[Track 1] Ayala Banquet", id: "track1", "image": "{% static 'img/function/ayala.jpg' %}"},
+      {name: "[Track 2] Magallanes", id: "track2", "image": "{% static 'img/function/magallanes.jpg' %}"},
+      {name: "[Track 3] Bel Air", id: "track3", "image": "{% static 'img/function/belair.jpg' %}"},
+    ],
+    headerHeight: 90,
+    onBeforeHeaderRender: args => {
+      args.header.verticalAlignment = "top";
+      args.header.areas = [
+        {
+          left: "calc(50% - 30px)",
+          bottom: 5,
+          width: 60,
+          height: 60,
+          fontColor: "#999999",
+          image: args.column.data.image,
+          style: "box-sizing: border-box; border-radius: 50%; border: 3px solid #ffffff; overflow: hidden;",
+        }
+      ];
+    }
+  };
+  const dp1 = new DayPilot.Calendar("dp1", { startDate: "2024-02-25", ...config });
+  const dp2 = new DayPilot.Calendar("dp2", { startDate: "2024-02-26", ...config });
+  dp1.init();
+  dp2.init();
+
+  const app = {
+    loadEventData() {
+      const events = [
+        {% for event in page.day1_events %}
+          {
+            start: "2024-02-25T{{ event.start }}",
+            end: "2024-02-25T{{ event.end }}",
+            resource: "{{ event.track }}",
+            id: DayPilot.guid(),
+            text: "{{ event.time }}\n{{ event.name }}{% if event.speaker %} by {{ event.speaker }}{% endif %}"
+          },
+        {% endfor %}
+      ];
+      dp1.update({events});
+    },
+    init() {
+      this.loadEventData();
+    }
+  };
+  app.init();
+
+  const app2 = {
+    loadEventData() {
+      const events = [
+        {% for event in page.day2_events %}
+          {
+            start: "2024-02-26T{{ event.start }}",
+            end: "2024-02-26T{{ event.end }}",
+            resource: "{{ event.track }}",
+            id: DayPilot.guid(),
+            text: "{{ event.time }}\n{{ event.name }}{% if event.speaker %} by {{ event.speaker }}{% endif %}"
+          },
+        {% endfor %}
+      ];
+      dp2.update({events});
+    },
+    init() {
+      this.loadEventData();
+    }
+  };
+  app2.init();
+</script>
+{% endblock extra_js %}

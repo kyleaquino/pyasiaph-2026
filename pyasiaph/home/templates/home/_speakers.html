@@ -1,0 +1,40 @@
+{% load static %} {% load wagtailimages_tags %}
+
+<div class="max-w-full mx-auto min-h-[800px] py-[80px] text-center" id="speakers">
+  <div class="max-w-975 mx-auto px-25 lg:px-0">
+    <p class="font-baybayinsisil text-20 md:text-24">
+      {{ page.speaker_subtitle }}
+    </p>
+    <h2 class="pycon-header text-5xl md:text-7xl my-4">
+      {{ page.speaker_title }}
+    </h2>
+    <h2 class="pycon-subheader mx-auto my-6">
+      Discover our speakers for PyCon APAC 2025
+    </h2>
+  </div>
+  <div class="container mx-auto mt-20">
+    <div class="splide slider1">
+      <div class="splide__track">
+        <ul class="splide__list grid-container">
+          {% for speaker in page.speakers %}
+          <li class="splide__slide grid-item">
+            <a href="https://pretalx.com/pycon-apac-2025/speaker/{{ speaker.code }}" class="text-left text-32 text-black">
+              {% if speaker.avatar %}
+                <img src="{{ speaker.avatar }}" alt="{{ speaker.name }}" loading="lazy" />
+              {% else %}
+                <img src="https://pretalx.com/pycon-apac-2025/speaker/avatar.svg" />
+              {% endif %}
+            </a>
+            <div class="mt-5 mx-auto">
+              <p class="text-32">
+                {{ speaker.name }}
+              </p>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bamboo-divider max-w-full h-10"></div>

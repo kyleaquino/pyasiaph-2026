@@ -1,0 +1,45 @@
+{% load wagtailimages_tags %} {% load static %}
+
+<div
+  class="event-venue-box max-w-full mx-auto bg-bamboo-2 min-h-[800px] py-[80px] bg-bamboo-2"
+  id="keynote-speakers"
+>
+  <div class="max-w-975 mx-auto px-25 lg:px-0 text-center text-black">
+    <p class="font-baybayinsisil text-20 md:text-24">
+      {{ page.keynote_subtitle }}
+    </p>
+    <h1 class="content-title text-5xl md:text-7xl font-medium mb-5 text-center">
+      {{ page.keynote_title }}
+    </h1>
+    <h2
+      class="content-subtitle italic text-2xl md:text-3xl text-center font-medium mb-2"
+    >
+      Discover our keynote speakers for PyCon APAC 2025
+    </h2>
+  </div>
+
+  <div class="container mx-auto mt-20">
+    <div class="splide slider1">
+      <div class="splide__track">
+        <ul class="splide__list flex flex-col md:flex-row">
+          {% for speaker in page.keynote_speakers %}
+          <li class="splide__slide">
+            <a href="https://pretalx.com/pycon-apac-2025/speaker/{{ speaker.code }}" class="text-left text-32 text-black">
+              {% if speaker.avatar %}
+                <img src="{{ speaker.avatar }}" alt="{{ speaker.name }}" loading="lazy" />
+              {% else %}
+                <img src="https://pretalx.com/pycon-apac-2025/speaker/avatar.svg" />
+              {% endif %}
+            </a>
+            <div class="mt-5 mx-auto">
+              <p class="text-32 text-black">
+                {{ speaker.name }}
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bamboo-divider max-w-full h-10"></div>

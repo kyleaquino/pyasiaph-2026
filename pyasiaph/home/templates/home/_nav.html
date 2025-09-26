@@ -1,0 +1,62 @@
+{% load static %}
+
+<header class="w-full absolute top-0 left-0 p-25 z-50">
+    <nav>
+        <div class="w-full flex justify-between">
+            <div></div>
+            <button class="toggle-menu logo-shadow burger-icon">
+                <svg width="35px" height="35px" viewBox="-2.4 -2.4 16.80 16.80" enable-background="new 0 0 12 12" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#fffff" stroke="#fffff" transform="rotate(0)matrix(1, 0, 0, 1, 0, 0)" stroke-width="0.00012000000000000002">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)">
+                       <path transform="translate(-2.4, -2.4), scale(1.05)" fill="#f8d455" d="M9.166.33a2.25 2.25 0 00-2.332 0l-5.25 3.182A2.25 2.25 0 00.5 5.436v5.128a2.25 2.25 0 001.084 1.924l5.25 3.182a2.25 2.25 0 002.332 0l5.25-3.182a2.25 2.25 0 001.084-1.924V5.436a2.25 2.25 0 00-1.084-1.924L9.166.33z" strokewidth="0"></path>
+                    </g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#f7f8f8" stroke-width="0.264">
+                       <g>
+                          <rect fill="#1D1D1B" height="1" width="11" x="0.5" y="5.5"></rect>
+                          <rect fill="#1D1D1B" height="1" width="11" x="0.5" y="2.5"></rect>
+                          <rect fill="#1D1D1B" height="1" width="11" x="0.5" y="8.5"></rect>
+                       </g>
+                    </g>
+                    <g id="SVGRepo_iconCarrier">
+                       <g>
+                          <rect fill="#1D1D1B" height="1" width="11" x="0.5" y="5.5"></rect>
+                          <rect fill="#1D1D1B" height="1" width="11" x="0.5" y="2.5"></rect>
+                          <rect fill="#1D1D1B" height="1" width="11" x="0.5" y="8.5"></rect>
+                       </g>
+                    </g>
+                 </svg>
+            </button>
+        </div>
+        <div
+            class="nav-menu transition ease duration-500 fixed z-50 left-0 top-0 w-full h-screen bg-blue-1 transform -translate-x-full p-25 flex flex-col justify-center">
+            <div class="w-full flex justify-between absolute top-0 left-0 p-25">
+                <a href="/">
+                    <img src="{% static 'img/icon/icon-logo.svg' %}" alt="Pycon PH 2024" />
+                </a>
+                <button class="toggle-menu focus:outline-none focus:shadow-none">
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M20.3493 20.9799L3.06885 3.69945L3.74767 3.02063L21.0281 20.301L20.3493 20.9799Z"
+                            fill="white" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M3.06885 20.301L20.3493 3.02063L21.0281 3.69945L3.74767 20.9799L3.06885 20.301Z"
+                            fill="white" />
+                    </svg>
+                </button>
+            </div>
+            <ul class="mb-15">
+                {% for page in page.get_children %}
+                    {% if page.show_in_menus and page.live %}
+                    <li class="text-center mb-10 no-bullet">
+                        <a href="{{ page.url }}" class="no-underline text-24 md:text-48 text-white font-medium hover:opacity-80">{{ page.title }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <p class="text-16 text-white text-center mb-30 font-fira">
+                Message us at pycon@python.ph for questions and
+                inquiries
+            </p>
+            {% include "socials.html" %}
+        </div>
+    </nav>
+</header>

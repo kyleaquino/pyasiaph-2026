@@ -1,0 +1,10 @@
+<div class="bg-[#12204A] flex gap-8 py-5 justify-center text-14">
+    {% with parent=page.get_parent %}
+        <div class="py-2"><a href="{{ parent.url }}" class="text-[#FFCA50] no-underline font-bold">Home</a></div>
+        {% for page in parent.get_children %}
+            {% if page.show_in_menus and page.live %}
+                <div class="py-2"><a href="{{ page.url }}" class="text-[#FFCA50] no-underline font-bold">{{ page.title }}</a></div>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+</div>

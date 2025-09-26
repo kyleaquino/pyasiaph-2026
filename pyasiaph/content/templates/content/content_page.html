@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block body_class %}{% endblock %}
+
+{% block extra_css %}
+<style>
+p {
+  margin: 12px;
+}
+
+ul > li {
+  margin: 12px;
+  margin-left: 20px;
+  list-style-type: disc; /* Options: disc, circle, square, none */
+  list-style-position: inside; /* inside or outside */
+}
+
+h3 {
+    margin: 32px 0;
+    font-family: Noto Sans;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 43.58px;
+}
+
+h4 {
+    font-family: Noto Sans;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 43.58px;
+}
+
+.content-body a {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.content-body h2 {
+    margin: 32px 0;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 43.58px;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% if page.slug == 'schedule' %}
+<div class="max-w-7xl mx-auto">
+  <h2 class="text-5xl my-10 content-title">
+    {{ page.content_title }}
+  </h2>
+  {% if page.content_subtitle %}
+  <h2 class="mb-10 lg:mb-32">
+      {{ page.content_subtitle }}
+  </h2>
+  {% endif %}
+</div>
+
+<script type="text/javascript" src="https://pretalx.com/pycon-apac-2025/schedule/widget/v2.en.js"></script>
+<pretalx-schedule
+  event-url="https://pretalx.com/pycon-apac-2025/"
+  locale="en"
+  style="--pretalx-clr-primary: #2d7353; zoom: 95%;">
+</pretalx-schedule>
+<noscript>
+   <div class="pretalx-widget">
+        <div class="pretalx-widget-info-message">
+            JavaScript is disabled in your browser. To access our schedule without JavaScript,
+            please <a target="_blank" href="https://pretalx.com/pycon-apac-2025/schedule/">
+              click here</a>.
+        </div>
+    </div>
+</noscript>
+{% else %}
+<div class="max-w-3xl mx-auto">
+    <div class="mb-24">
+        <h2 class="text-5xl my-10 content-title">
+            {{ page.content_title }}
+        </h2>
+        {% if page.content_subtitle %}
+        <h2 class="mb-10 lg:mb-32">
+            {{ page.content_subtitle }}
+        </h2>
+        {% endif %}
+        <div class="content-body">
+            {{ page.content_body|richtext }}
+        </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock content %}
+
+{% block footer %}
+    {% include "footer-slim.html" %}
+{% endblock footer %}

@@ -1,0 +1,25 @@
+{% load static %}
+
+<section class="tickets-section py-16">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="text-left max-w-2xl">
+                <h2 class="pycon-header text-5xl md:text-7xl my-4">Tickets Available</h2>
+                <p class="text-lg text-gray-700 mb-6 max-w-xl">
+                    Join us as we learn something new, teach something new, find opportunities, build cool things, make friends, and geek out!
+                </p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="text-right mb-2">
+                    <span class="text-gray-600">2-day in-person event</span>
+                </div>
+                {% if page.ticket_link %}
+                <a href="{{ page.ticket_link }}" class="btn-action">
+                    Get Tickets
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<div class="bamboo-divider max-w-full h-10 mb-[-4px]"></div>

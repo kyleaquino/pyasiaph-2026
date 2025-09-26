@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block body_class %}{% endblock %}
+{% block content %}
+
+<main class="">
+    <div class="w-full bg-img-1 flex justify-center items-start min-h-svh md:min-h-[1570px]">
+        <div class="pt-[70px]">
+            <div class="logo-shadow flex flex-col items-center max-w-590 block mx-auto">
+                <img
+                    src="{% static 'img/apac-2025.svg' %}"
+                    alt="Pycon PH 2025"
+                    class="w-1/2"
+                />
+            </div>
+            <div class="flex flex-col md:flex-row justify-center my-8 text-center font-medium text-normal text-base sm:text-xl">
+                <div class="">
+                  📅 1-2 March 2025
+                </div>
+                <div class="separator mx-4"></div>
+                <div class="hidden md:block">
+                  📍 {{ page.location_main }} {{ page.location_city }}
+                </div>
+                <div class="block md:hidden">
+                  📍 {{ page.location_main }}
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                {% if page.ticket_link %}
+                <a href="{{ page.ticket_link }}" class="btn-action">
+                    Get Tickets
+                </a>
+                {% endif %}
+
+                {% if page.cfp_link %}
+                <a href="{{ page.cfp_link }}" class="btn-action">
+                    Become a Speaker
+                </a>
+                {% endif %}
+                {% if page.sponsor_link %}
+                <a href="{{ page.sponsor_link }}" class="btn-action">
+                    View Program Schedule
+                </a>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+    {% include "home/_what_is_pycon.html" %}
+
+    {% include "home/_expect.html" %}
+    {% include "home/_tickets.html" %}
+    {% include "home/_venue.html" %}
+
+    {% if page.keynote_speakers %}
+        {% include "home/_keynotes.html" %}
+    {% endif %}
+
+    {% if page.speakers %}
+        {% include "home/_speakers.html" %}
+    {% endif %}
+
+    {% if page.sponsor_types %}
+        {% include "home/_sponsor_list.html" %}
+    {% endif %}
+
+</main>
+
+{% endblock content %}
