@@ -1,4 +1,4 @@
-from pydantic import Field
+from pydantic import Field, BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pathlib import Path
 import re
@@ -8,16 +8,25 @@ BASE_DIR = Path(__file__).resolve().parents[1]
 LOCAL_POSTGRES_URL = "postgres://postgres:postgres@localhost"
 
 
+class PretalxConfig(BaseModel):
+    BASE_URL: str = Field(default="https://pretalx.com")
+    API_TOKEN: str = Field(default="")
+
+
 class Settings(BaseSettings):
     SITE_NAME: str = Field(default="pythonasiaph")
     APP_ENV: str = Field(default="development")
+    HOSTNAME: str = Field(default="localhost")
+    PORT: int = Field(default=8000)
     BASE_URL: str = Field(default="http://localhost:8000")
     SECRET_KEY: str = Field(default="django-insecure-#)z=peyywxgzak%xzdl9@*qfl!ie402zk57@cbh8@n*(9ar8do")
-    DEBUG: bool = Field(default=False)
+    DEBUG: bool = Field(default=True)
     ALLOWED_HOSTS: list[str] = Field(default=[])
     DATABASE_URL: str = Field(default=LOCAL_POSTGRES_URL)
     TRUSTED_ORIGINS: list[str] = Field(default=[])
     SENTRY_DSN: str = Field(default="")
+
+    PRETALX: PretalxConfig = Field(default=PretalxConfig())
 
     model_config = SettingsConfigDict(
         env_file=".env",

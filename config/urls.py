@@ -6,7 +6,9 @@ from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+from config.environment import settings as env_settings
 from pyasiaph.search import views as search_views
+
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -15,8 +17,7 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
 ]
 
-
-if settings.DEBUG:
+if env_settings.APP_ENV == "development":
     urlpatterns += (path("__reload__/", include("django_browser_reload.urls")),)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

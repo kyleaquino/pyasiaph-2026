@@ -512,7 +512,7 @@ wheels = [
 ]
 
 [[package]]
-name = "pyconapac-2026"
+name = "pyasiaph-2026"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

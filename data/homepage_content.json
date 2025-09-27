@@ -1,0 +1,21 @@
+{
+  "homepage": {
+    "title": "PyAsiaPH 2026",
+    "date_start": "2026-03-21",
+    "date_end": "2026-03-23",
+    "time_start": "09:00:00",
+    "location_main": "De La Salle University (DLSU)",
+    "location_city": "Malate, Manila",
+    "keynote_title": "Keynote Speakers",
+    "keynote_subtitle": "Meet our amazing keynote speakers",
+    "speaker_title": "Speakers",
+    "speaker_subtitle": "Learn from industry experts",
+    "schedule_title": "Schedule",
+    "schedule_subtitle": "Conference program",
+    "sponsor_title": "Sponsors",
+    "sponsor_subtitle": "Our amazing sponsors",
+    "banner_title": "Welcome to PyAsiaPH 2026",
+    "banner_call_to_action": "Get Tickets",
+    "banner_link": "https://example.com/tickets"
+  }
+}
