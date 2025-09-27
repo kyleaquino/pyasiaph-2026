@@ -1,12 +1,14 @@
 import requests
+from config.environment import settings
+
 
 class PretalxService:
-    def __init__(self, base_url: str, api_token: str):
-        self.base_url = base_url.rstrip('/')
+    def __init__(self, base_url: str):
+        self.base_url = settings.PRETALX.BASE_URL.rstrip("/")
         self.headers = {
-                "Authorization": f"Token {api_token}",
-                "Content-Type": "application/json"
-                }
+            "Authorization": f"Token {settings.PRETALX.API_TOKEN}",
+            "Content-Type": "application/json",
+        }
 
     def get_event(self, event_slug: str):
         url = f"{self.base_url}/api/events/{event_slug}/"
